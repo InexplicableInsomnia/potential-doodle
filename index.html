@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>🏮 Happy Lantern Festival · Full Moon Night</title>
+    <title>🏮 元宵快乐 · Happy Lantern Festival</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem;  /* 手机周围留更少边距 */
+            padding: 0.5rem;
         }
 
         .night-sky {
@@ -29,19 +29,19 @@
             width: 100%;
             max-width: 1200px;
             min-height: 600px;
-            height: 95vh;       /* 手机屏幕高度利用率高一点 */
+            height: 95vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 2rem 0.8rem 2rem 0.8rem;   /* 略微缩小圆角适应手机 */
+            border-radius: 2rem 0.8rem 2rem 0.8rem;
             background: transparent;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 2px #f5e6b0 inset;
             backdrop-filter: blur(2px);
             overflow: hidden;
         }
 
-        /* 星星 (微调数量位置更适合手机, 但不影响) */
+        /* 星星背景 */
         .night-sky::before {
             content: '';
             position: absolute;
@@ -71,9 +71,9 @@
 
         .moon {
             position: absolute;
-            top: 2%;           /* 手机上月亮稍微下移一点，避免贴边 */
+            top: 2%;
             right: 3%;
-            width: 100px;       /* 手机月亮稍小 */
+            width: 100px;
             height: 100px;
             background: radial-gradient(circle at 30% 30%, #fffde7, #ffe68f);
             border-radius: 50%;
@@ -82,10 +82,10 @@
             opacity: 0.95;
         }
 
-        /* 灯笼公用，针对手机微调尺寸 */
+        /* 灯笼 - 手机优化 */
         .lantern {
             position: absolute;
-            font-size: clamp(2.8rem, 9vw, 4.5rem);  /* 手机最大略小 */
+            font-size: clamp(2.8rem, 9vw, 4.5rem);
             line-height: 1;
             user-select: none;
             filter: drop-shadow(0 0 12px #ff7b2b) drop-shadow(0 0 6px #ffb347);
@@ -96,7 +96,6 @@
             pointer-events: none;
         }
 
-        /* 重新平衡灯笼位置，让它们在手机上也不会叠在一起太挤 */
         .lantern1 { top: 2%; left: 1%; animation-delay: 0s; font-size: 3.8rem; }
         .lantern2 { top: 8%; right: 2%; animation-delay: 1.2s; font-size: 4.2rem; }
         .lantern3 { bottom: 6%; left: 3%; animation-delay: 0.7s; font-size: 4.5rem; }
@@ -108,20 +107,20 @@
 
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(1.5deg); } /* 手机幅度略小 */
+            50% { transform: translateY(-15px) rotate(1.5deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        /* 中央内容卡片 - 手机优化 */
+        /* 中央内容卡片 */
         .content {
             position: relative;
             z-index: 20;
             text-align: center;
-            background: rgba(10, 20, 40, 0.6);    /* 稍微加深保证手机强光下可读 */
+            background: rgba(10, 20, 40, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 40px 15px 40px 15px;
-            padding: 1.5rem 1.2rem;               /* 手机内边距减小 */
+            padding: 1.5rem 1.2rem;
             margin: 1rem 0.8rem;
             border: 2px solid #f5d74288;
             box-shadow: 0 15px 25px -10px black, 0 0 0 2px #f9d56e inset, 0 0 30px #ffb70055;
@@ -129,8 +128,50 @@
             width: 95%;
         }
 
+        /* 语言切换按钮 - 精致小开关 */
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 30;
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 0.6rem;
+            border-radius: 40px;
+            border: 1px solid #f9d56e;
+            box-shadow: 0 0 15px #ffb054;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #ffebb5;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent;
+        }
+
+        .lang-btn.active {
+            background: #f9d56e;
+            color: #1b2b4a;
+            border-color: #ffffffb0;
+            box-shadow: 0 0 12px #ffd966;
+        }
+
+        .lang-btn:first-child.active {
+            background: #f9d56e;
+        }
+
         h1 {
-            font-size: clamp(2.4rem, 10vw, 4.5rem);   /* 手机标题适应 */
+            font-size: clamp(2.4rem, 10vw, 4.5rem);
             font-weight: 800;
             letter-spacing: 2px;
             text-shadow: 0 3px 0 #b45f2b, 0 6px 8px #00000080, 0 0 15px #ffc107;
@@ -140,7 +181,7 @@
         }
 
         .date {
-            font-size: 1rem;            /* 手机略小 */
+            font-size: 1rem;
             background: linear-gradient(135deg, #f9d56e, #ffb054);
             -webkit-background-clip: text;
             background-clip: text;
@@ -152,7 +193,7 @@
         }
 
         .poem {
-            font-size: 1.2rem;           /* 手机字体缩小一点 */
+            font-size: 1.2rem;
             font-style: italic;
             color: #ffebb5;
             margin-bottom: 1.5rem;
@@ -163,7 +204,6 @@
             border-radius: 30px;
         }
 
-        /* 汤圆行 - 手机间距缩小 */
         .tangyuan-row {
             display: flex;
             flex-wrap: wrap;
@@ -173,7 +213,7 @@
         }
 
         .ball {
-            width: 85px;          /* 手机略小 */
+            width: 85px;
             height: 85px;
             background: radial-gradient(circle at 35% 35%, #fffbf0, #fce6c0);
             border-radius: 50%;
@@ -191,7 +231,7 @@
 
         .eye {
             position: absolute;
-            width: 12px;          /* 眼睛略小 */
+            width: 12px;
             height: 12px;
             background: #3e2a1f;
             border-radius: 50%;
@@ -314,7 +354,7 @@
 
         .footer-note {
             margin-top: 1.5rem;
-            font-size: 0.95rem;       /* 手机小一点 */
+            font-size: 0.95rem;
             color: #d6c69a;
             text-shadow: 0 0 8px black;
             border-top: 1px solid #fad15e50;
@@ -329,10 +369,10 @@
             background: #2a3f5a80;
             border-radius: 30px;
             padding: 0.2rem 0.8rem;
-            white-space: nowrap;      /* 手机避免断行难看，允许换行但 nowrap 配合 wrap 整体 */
+            white-space: nowrap;
         }
 
-        /* 针对超小屏 ( < 400 ) 的特殊优化 */
+        /* 响应式微调 */
         @media (max-width: 450px) {
             .content {
                 padding: 1.2rem 0.8rem;
@@ -344,28 +384,11 @@
                 right: 2%;
             }
             .lantern {
-                font-size: 3rem;       /* 控制灯笼大小 */
+                font-size: 3rem;
             }
-            .lantern1 { font-size: 3.2rem; }
-            .lantern2 { font-size: 3.5rem; }
-            .lantern3 { font-size: 3.8rem; }
-            .lantern4 { font-size: 3.4rem; }
-            .lantern5 { font-size: 3rem; }
-            .lantern6 { font-size: 4rem; }
-            .lantern7 { font-size: 3.2rem; }
-            .lantern8 { font-size: 3.5rem; }
-
             .ball {
                 width: 75px;
                 height: 75px;
-            }
-            .mouth-smile {
-                width: 32px;
-                border-bottom: 4px solid #6b4c3b;
-            }
-            .eye {
-                width: 10px;
-                height: 10px;
             }
             .poem {
                 font-size: 1rem;
@@ -373,15 +396,12 @@
             .date {
                 font-size: 0.9rem;
             }
-            .riddle-summary {
-                font-size: 1rem;
-            }
-            .riddle-answer {
-                font-size: 1.2rem;
+            .lang-btn {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.8rem;
             }
         }
 
-        /* 超小屏隐藏个别灯笼避免太挤 */
         @media (max-width: 380px) {
             .lantern7, .lantern8 {
                 display: none;
@@ -391,7 +411,7 @@
         .glitter {
             position: absolute;
             color: #ffec9e;
-            font-size: 1.8rem;      /* 手机上 glitter 稍小 */
+            font-size: 1.8rem;
             opacity: 0.5;
             animation: glitterFloat 8s infinite linear;
             user-select: none;
@@ -412,7 +432,13 @@
     <div class="night-sky">
         <div class="moon"></div>
 
-        <!-- 灯笼全部保留，但部分会在超小屏隐藏 -->
+        <!-- 语言切换按钮 -->
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btn-zh">🏮 中文</button>
+            <button class="lang-btn" id="btn-en">🏮 English</button>
+        </div>
+
+        <!-- 灯笼装饰 -->
         <div class="lantern lantern1">🏮</div>
         <div class="lantern lantern2">🏮</div>
         <div class="lantern lantern3">🏮</div>
@@ -426,13 +452,14 @@
         <div class="glitter glitter2">✨</div>
         <div class="glitter glitter3">🎊</div>
 
-        <div class="content">
-            <!-- English title and greetings -->
-            <h1>Happy Lantern Festival</h1>
-            <div class="date">🏮 March 2, 2026 · The 15th of First Lunar Month 🏮</div>
-            <div class="poem">✨ Full moon bright, lanterns aglow · Sweet tangyuan, together we go ✨</div>
+        <!-- 内容容器，所有文字部分由JS动态填充 -->
+        <div class="content" id="content">
+            <!-- 以下内容会通过js替换，但保留初始中文占位 -->
+            <h1 id="title">元宵节快乐</h1>
+            <div class="date" id="date">🏮 2026年3月2日 · 农历正月十五 🏮</div>
+            <div class="poem" id="poem">✨ 火树银花合 · 星桥铁锁开 ✨</div>
 
-            <!-- Three cute tangyuan (optimized for touch) -->
+            <!-- 汤圆不变，静态 -->
             <div class="tangyuan-row">
                 <div class="ball smile">
                     <span class="eye left-eye"></span>
@@ -446,29 +473,112 @@
                 </div>
                 <div class="ball wink">
                     <span class="eye left-eye"></span>
-                    <!-- right eye styled inline for wink -->
                     <span class="eye right-eye" style="background: transparent; border-bottom: 4px solid #3e2a1f; width:14px; height:7px; border-radius:0; top:38%; right:20%; box-shadow:none; background:transparent;"></span>
                     <span class="mouth-smile"></span>
                 </div>
             </div>
 
-            <!-- Lantern riddle in English -->
+            <!-- 灯谜区域动态 -->
             <div class="riddle-block">
                 <details>
-                    <summary class="riddle-summary">🏮 Riddle: I’m not the sun, but I shine at night. I change my shape, yet I’m always bright. What am I?</summary>
-                    <div class="riddle-answer">The Moon</div>
+                    <summary class="riddle-summary" id="riddleSummary">🏮 猜灯谜：十五的月亮（打一成语）</summary>
+                    <div class="riddle-answer" id="riddleAnswer">正大光明</div>
                 </details>
             </div>
 
-            <!-- Footer blessings in English -->
-            <div class="footer-note">
-                <span>🏮 Full Moon, Full Joy</span>
-                <span>🍡 Sweet Reunion</span>
-                <span>🏮 Peace & Prosperity</span>
+            <!-- 底部祝福动态 -->
+            <div class="footer-note" id="footer">
+                <span>🏮 花好月圆</span>
+                <span>🍡 事事圆满</span>
+                <span>🏮 阖家安康</span>
             </div>
         </div>
 
-        <div style="position: absolute; bottom: 5px; left: 10px; font-size: 0.7rem; color: #ab8e5d; z-index: 30; opacity: 0.5;">Lantern Festival · Wishes come true</div>
+        <div style="position: absolute; bottom: 5px; left: 10px; font-size: 0.7rem; color: #ab8e5d; z-index: 30; opacity: 0.5;" id="credit">元宵佳节 · 万事顺遂</div>
     </div>
+
+    <script>
+        (function() {
+            // 中英文字段映射
+            const translations = {
+                zh: {
+                    title: '元宵节快乐',
+                    date: '🏮 2026年3月2日 · 农历正月十五 🏮',
+                    poem: '✨ 火树银花合 · 星桥铁锁开 ✨',
+                    riddleSummary: '🏮 猜灯谜：十五的月亮（打一成语）',
+                    riddleAnswer: '正大光明',
+                    footer: ['🏮 花好月圆', '🍡 事事圆满', '🏮 阖家安康'],
+                    credit: '元宵佳节 · 万事顺遂'
+                },
+                en: {
+                    title: 'Happy Lantern Festival',
+                    date: '🏮 March 2, 2026 · The 15th of First Lunar Month 🏮',
+                    poem: '✨ Full moon bright, lanterns aglow · Sweet tangyuan, together we go ✨',
+                    riddleSummary: '🏮 Riddle: I’m not the sun, but I shine at night. I change my shape, yet I’m always bright. What am I?',
+                    riddleAnswer: 'The Moon',
+                    footer: ['🏮 Full Moon, Full Joy', '🍡 Sweet Reunion', '🏮 Peace & Prosperity'],
+                    credit: 'Lantern Festival · Wishes come true'
+                }
+            };
+
+            // 获取DOM元素
+            const titleEl = document.getElementById('title');
+            const dateEl = document.getElementById('date');
+            const poemEl = document.getElementById('poem');
+            const riddleSummaryEl = document.getElementById('riddleSummary');
+            const riddleAnswerEl = document.getElementById('riddleAnswer');
+            const footerEl = document.getElementById('footer');
+            const creditEl = document.getElementById('credit');
+
+            // 获取按钮
+            const btnZh = document.getElementById('btn-zh');
+            const btnEn = document.getElementById('btn-en');
+
+            // 当前语言
+            let currentLang = 'zh';  // 默认中文
+
+            // 更新页面文字
+            function setLanguage(lang) {
+                currentLang = lang;
+                const t = translations[lang];
+
+                // 更新标题、日期、诗句
+                titleEl.textContent = t.title;
+                dateEl.textContent = t.date;
+                poemEl.textContent = t.poem;
+
+                // 更新灯谜
+                riddleSummaryEl.textContent = t.riddleSummary;
+                riddleAnswerEl.textContent = t.riddleAnswer;
+
+                // 更新底部三个祝福语 (footer内部span)
+                const footerSpans = footerEl.querySelectorAll('span');
+                if (footerSpans.length === 3) {
+                    footerSpans[0].textContent = t.footer[0];
+                    footerSpans[1].textContent = t.footer[1];
+                    footerSpans[2].textContent = t.footer[2];
+                }
+
+                // 更新左下角小字
+                creditEl.textContent = t.credit;
+
+                // 切换按钮激活样式
+                if (lang === 'zh') {
+                    btnZh.classList.add('active');
+                    btnEn.classList.remove('active');
+                } else {
+                    btnEn.classList.add('active');
+                    btnZh.classList.remove('active');
+                }
+            }
+
+            // 绑定点击事件
+            btnZh.addEventListener('click', () => setLanguage('zh'));
+            btnEn.addEventListener('click', () => setLanguage('en'));
+
+            // 初始设置为中文（确保按钮状态和文字一致）
+            setLanguage('zh');
+        })();
+    </script>
 </body>
 </html>
