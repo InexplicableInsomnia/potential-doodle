@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>🏮 Happy Lantern Festival · Full Moon Night</title>
     <style>
         * {
@@ -21,7 +21,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 0.5rem;  /* 手机周围留更少边距 */
         }
 
         .night-sky {
@@ -29,18 +29,19 @@
             width: 100%;
             max-width: 1200px;
             min-height: 600px;
-            height: 90vh;
+            height: 95vh;       /* 手机屏幕高度利用率高一点 */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 3rem 1rem 3rem 1rem;
+            border-radius: 2rem 0.8rem 2rem 0.8rem;   /* 略微缩小圆角适应手机 */
             background: transparent;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 2px #f5e6b0 inset;
             backdrop-filter: blur(2px);
             overflow: hidden;
         }
 
+        /* 星星 (微调数量位置更适合手机, 但不影响) */
         .night-sky::before {
             content: '';
             position: absolute;
@@ -49,20 +50,20 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(2px 2px at 10% 20%, #fff9e6, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 23% 45%, #fff4d0, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 32% 78%, #fff9e6, rgba(0,0,0,0)),
-                radial-gradient(4px 4px at 45% 15%, #fff2b5, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 58% 33%, #fff9e6, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 67% 82%, #fff4d0, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 74% 51%, #fff9e6, rgba(0,0,0,0)),
-                radial-gradient(5px 5px at 81% 19%, #fff2b5, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 88% 66%, #fff9e6, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 95% 39%, #fff4d0, rgba(0,0,0,0)),
-                radial-gradient(4px 4px at 7% 91%, #fff2b5, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 18% 72%, #fff9e6, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 39% 56%, #fff4d0, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 52% 94%, #fff9e6, rgba(0,0,0,0));
+                radial-gradient(2px 2px at 8% 15%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 20% 40%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 30% 75%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 42% 12%, #fff2b5, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 55% 30%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 63% 80%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 70% 48%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(5px 5px at 78% 22%, #fff2b5, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 85% 64%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 92% 35%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 10% 88%, #fff2b5, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 15% 68%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 35% 52%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 48% 90%, #fff9e6, rgba(0,0,0,0));
             background-repeat: no-repeat;
             pointer-events: none;
             z-index: 0;
@@ -70,23 +71,24 @@
 
         .moon {
             position: absolute;
-            top: 5%;
-            right: 5%;
-            width: 120px;
-            height: 120px;
+            top: 2%;           /* 手机上月亮稍微下移一点，避免贴边 */
+            right: 3%;
+            width: 100px;       /* 手机月亮稍小 */
+            height: 100px;
             background: radial-gradient(circle at 30% 30%, #fffde7, #ffe68f);
             border-radius: 50%;
-            box-shadow: 0 0 80px 20px #ffdf80, 0 0 30px 5px #fff2c0;
+            box-shadow: 0 0 60px 15px #ffdf80, 0 0 20px 3px #fff2c0;
             z-index: 1;
             opacity: 0.95;
         }
 
+        /* 灯笼公用，针对手机微调尺寸 */
         .lantern {
             position: absolute;
-            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-size: clamp(2.8rem, 9vw, 4.5rem);  /* 手机最大略小 */
             line-height: 1;
             user-select: none;
-            filter: drop-shadow(0 0 15px #ff7b2b) drop-shadow(0 0 8px #ffb347);
+            filter: drop-shadow(0 0 12px #ff7b2b) drop-shadow(0 0 6px #ffb347);
             animation: float 5s ease-in-out infinite;
             z-index: 5;
             transform-origin: center;
@@ -94,85 +96,88 @@
             pointer-events: none;
         }
 
-        .lantern1 { top: 3%; left: 2%; animation-delay: 0s; font-size: 4.2rem; }
-        .lantern2 { top: 12%; right: 3%; animation-delay: 1.2s; font-size: 4.8rem; }
-        .lantern3 { bottom: 8%; left: 6%; animation-delay: 0.7s; font-size: 5rem; }
-        .lantern4 { bottom: 15%; right: 8%; animation-delay: 2s; font-size: 4.5rem; }
-        .lantern5 { top: 25%; left: 12%; animation-delay: 1.5s; font-size: 3.8rem; }
-        .lantern6 { bottom: 25%; right: 15%; animation-delay: 0.3s; font-size: 5.2rem; }
-        .lantern7 { top: 40%; left: 3%; animation-delay: 2.2s; font-size: 4rem; display: block; }
-        .lantern8 { bottom: 5%; left: 20%; animation-delay: 1.8s; font-size: 4.6rem; }
+        /* 重新平衡灯笼位置，让它们在手机上也不会叠在一起太挤 */
+        .lantern1 { top: 2%; left: 1%; animation-delay: 0s; font-size: 3.8rem; }
+        .lantern2 { top: 8%; right: 2%; animation-delay: 1.2s; font-size: 4.2rem; }
+        .lantern3 { bottom: 6%; left: 3%; animation-delay: 0.7s; font-size: 4.5rem; }
+        .lantern4 { bottom: 12%; right: 5%; animation-delay: 2s; font-size: 4rem; }
+        .lantern5 { top: 20%; left: 8%; animation-delay: 1.5s; font-size: 3.5rem; }
+        .lantern6 { bottom: 20%; right: 10%; animation-delay: 0.3s; font-size: 4.8rem; }
+        .lantern7 { top: 35%; left: 2%; animation-delay: 2.2s; font-size: 3.8rem; display: block; }
+        .lantern8 { bottom: 4%; left: 18%; animation-delay: 1.8s; font-size: 4.2rem; }
 
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(1.5deg); } /* 手机幅度略小 */
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
+        /* 中央内容卡片 - 手机优化 */
         .content {
             position: relative;
             z-index: 20;
             text-align: center;
-            background: rgba(10, 20, 40, 0.55);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 60px 20px 60px 20px;
-            padding: 2rem 2.5rem;
-            margin: 1.5rem;
+            background: rgba(10, 20, 40, 0.6);    /* 稍微加深保证手机强光下可读 */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px 15px 40px 15px;
+            padding: 1.5rem 1.2rem;               /* 手机内边距减小 */
+            margin: 1rem 0.8rem;
             border: 2px solid #f5d74288;
-            box-shadow: 0 20px 30px -10px black, 0 0 0 2px #f9d56e inset, 0 0 30px #ffb70055;
-            max-width: 750px;
-            width: fit-content;
+            box-shadow: 0 15px 25px -10px black, 0 0 0 2px #f9d56e inset, 0 0 30px #ffb70055;
+            max-width: 600px;
+            width: 95%;
         }
 
         h1 {
-            font-size: clamp(2.8rem, 12vw, 5.5rem);
+            font-size: clamp(2.4rem, 10vw, 4.5rem);   /* 手机标题适应 */
             font-weight: 800;
-            letter-spacing: 4px;
-            text-shadow: 0 4px 0 #b45f2b, 0 8px 10px #00000080, 0 0 20px #ffc107;
+            letter-spacing: 2px;
+            text-shadow: 0 3px 0 #b45f2b, 0 6px 8px #00000080, 0 0 15px #ffc107;
             color: #fff8e0;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
             line-height: 1.2;
         }
 
         .date {
-            font-size: 1.3rem;
+            font-size: 1rem;            /* 手机略小 */
             background: linear-gradient(135deg, #f9d56e, #ffb054);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
             text-shadow: 0 2px 5px #00000050;
         }
 
         .poem {
-            font-size: 1.4rem;
+            font-size: 1.2rem;           /* 手机字体缩小一点 */
             font-style: italic;
             color: #ffebb5;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-top: 1px dashed #f9b83a;
             border-bottom: 1px dashed #f9b83a;
-            padding: 0.6rem 0;
+            padding: 0.5rem 0;
             background: #00000020;
             border-radius: 30px;
         }
 
+        /* 汤圆行 - 手机间距缩小 */
         .tangyuan-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem 2.5rem;
-            margin: 2rem 0 1.8rem;
+            gap: 1rem 1.8rem;
+            margin: 1.5rem 0 1.2rem;
         }
 
         .ball {
-            width: 100px;
-            height: 100px;
+            width: 85px;          /* 手机略小 */
+            height: 85px;
             background: radial-gradient(circle at 35% 35%, #fffbf0, #fce6c0);
             border-radius: 50%;
-            box-shadow: 0 10px 0 #c09a70, 0 15px 25px #00000060, inset -8px -5px 15px #bba88888, inset 5px 5px 20px white;
+            box-shadow: 0 8px 0 #c09a70, 0 12px 20px #00000060, inset -6px -4px 12px #bba88888, inset 4px 4px 15px white;
             position: relative;
             transition: transform 0.3s;
             display: flex;
@@ -186,8 +191,8 @@
 
         .eye {
             position: absolute;
-            width: 14px;
-            height: 14px;
+            width: 12px;          /* 眼睛略小 */
+            height: 12px;
             background: #3e2a1f;
             border-radius: 50%;
             top: 35%;
@@ -204,9 +209,9 @@
 
         .mouth-smile {
             position: absolute;
-            width: 44px;
-            height: 22px;
-            border-bottom: 5px solid #6b4c3b;
+            width: 38px;
+            height: 20px;
+            border-bottom: 4px solid #6b4c3b;
             border-radius: 0 0 30px 30px;
             bottom: 22%;
             left: 50%;
@@ -215,11 +220,11 @@
 
         .mouth-surprise {
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background: #6b4c3b;
             border-radius: 50%;
-            bottom: 26%;
+            bottom: 25%;
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 0 2px 4px black;
@@ -227,8 +232,8 @@
 
         .ball.wink .right-eye {
             background: transparent;
-            width: 16px;
-            height: 8px;
+            width: 14px;
+            height: 7px;
             border-bottom: 4px solid #3e2a1f;
             border-radius: 0;
             top: 38%;
@@ -239,8 +244,8 @@
         .ball::after {
             content: '';
             position: absolute;
-            width: 22px;
-            height: 10px;
+            width: 18px;
+            height: 8px;
             background: #ffb6b6a0;
             border-radius: 50%;
             bottom: 40%;
@@ -252,8 +257,8 @@
         .ball::before {
             content: '';
             position: absolute;
-            width: 22px;
-            height: 10px;
+            width: 18px;
+            height: 8px;
             background: #ffb6b6a0;
             border-radius: 50%;
             bottom: 40%;
@@ -264,20 +269,20 @@
         }
 
         .riddle-block {
-            margin: 2rem auto 0.5rem;
-            width: 90%;
-            max-width: 400px;
+            margin: 1.5rem auto 0.5rem;
+            width: 95%;
+            max-width: 360px;
             background: #263b55c0;
-            border-radius: 50px 10px 50px 10px;
+            border-radius: 40px 8px 40px 8px;
             border: 2px solid #f1cf7a;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             backdrop-filter: blur(5px);
             color: #ffefc0;
             text-align: left;
         }
 
         .riddle-summary {
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             font-weight: bold;
             list-style: '🏮 ';
             cursor: pointer;
@@ -290,16 +295,16 @@
         }
 
         .riddle-answer {
-            margin-top: 0.8rem;
-            font-size: 1.6rem;
+            margin-top: 0.6rem;
+            font-size: 1.4rem;
             color: #ffdb7c;
             text-align: center;
             background: #0e1f2f;
-            padding: 0.6rem 0;
+            padding: 0.5rem 0;
             border-radius: 30px;
             border: 1px solid #ffb851;
-            box-shadow: 0 0 15px #ffad37;
-            letter-spacing: 2px;
+            box-shadow: 0 0 12px #ffad37;
+            letter-spacing: 1px;
             font-weight: bold;
         }
 
@@ -308,52 +313,76 @@
         }
 
         .footer-note {
-            margin-top: 2rem;
-            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;       /* 手机小一点 */
             color: #d6c69a;
-            text-shadow: 0 0 10px black;
+            text-shadow: 0 0 8px black;
             border-top: 1px solid #fad15e50;
-            padding-top: 1rem;
+            padding-top: 0.8rem;
             display: flex;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .footer-note span {
             background: #2a3f5a80;
             border-radius: 30px;
-            padding: 0.2rem 1rem;
+            padding: 0.2rem 0.8rem;
+            white-space: nowrap;      /* 手机避免断行难看，允许换行但 nowrap 配合 wrap 整体 */
         }
 
-        @media (max-width: 550px) {
+        /* 针对超小屏 ( < 400 ) 的特殊优化 */
+        @media (max-width: 450px) {
             .content {
-                padding: 1.5rem 1rem;
+                padding: 1.2rem 0.8rem;
             }
             .moon {
-                width: 90px;
-                height: 90px;
-                top: 2%;
+                width: 80px;
+                height: 80px;
+                top: 1%;
                 right: 2%;
             }
             .lantern {
-                font-size: 3.2rem;
+                font-size: 3rem;       /* 控制灯笼大小 */
             }
+            .lantern1 { font-size: 3.2rem; }
+            .lantern2 { font-size: 3.5rem; }
+            .lantern3 { font-size: 3.8rem; }
+            .lantern4 { font-size: 3.4rem; }
+            .lantern5 { font-size: 3rem; }
+            .lantern6 { font-size: 4rem; }
+            .lantern7 { font-size: 3.2rem; }
+            .lantern8 { font-size: 3.5rem; }
+
             .ball {
-                width: 80px;
-                height: 80px;
+                width: 75px;
+                height: 75px;
             }
             .mouth-smile {
-                width: 35px;
+                width: 32px;
                 border-bottom: 4px solid #6b4c3b;
             }
             .eye {
                 width: 10px;
                 height: 10px;
             }
+            .poem {
+                font-size: 1rem;
+            }
+            .date {
+                font-size: 0.9rem;
+            }
+            .riddle-summary {
+                font-size: 1rem;
+            }
+            .riddle-answer {
+                font-size: 1.2rem;
+            }
         }
 
-        @media (max-width: 400px) {
+        /* 超小屏隐藏个别灯笼避免太挤 */
+        @media (max-width: 380px) {
             .lantern7, .lantern8 {
                 display: none;
             }
@@ -362,19 +391,19 @@
         .glitter {
             position: absolute;
             color: #ffec9e;
-            font-size: 2rem;
+            font-size: 1.8rem;      /* 手机上 glitter 稍小 */
             opacity: 0.5;
             animation: glitterFloat 8s infinite linear;
             user-select: none;
             pointer-events: none;
             z-index: 2;
         }
-        .glitter1 { top: 20%; left: 15%; animation-delay: 0s; }
-        .glitter2 { top: 70%; left: 85%; animation-delay: 3s; }
-        .glitter3 { top: 45%; left: 75%; animation-delay: 5s; }
+        .glitter1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .glitter2 { top: 70%; left: 80%; animation-delay: 3s; }
+        .glitter3 { top: 45%; left: 70%; animation-delay: 5s; }
         @keyframes glitterFloat {
             0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
-            50% { transform: translateY(-30px) rotate(30deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(20deg); opacity: 0.7; }
             100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
         }
     </style>
@@ -383,6 +412,7 @@
     <div class="night-sky">
         <div class="moon"></div>
 
+        <!-- 灯笼全部保留，但部分会在超小屏隐藏 -->
         <div class="lantern lantern1">🏮</div>
         <div class="lantern lantern2">🏮</div>
         <div class="lantern lantern3">🏮</div>
@@ -402,7 +432,7 @@
             <div class="date">🏮 March 2, 2026 · The 15th of First Lunar Month 🏮</div>
             <div class="poem">✨ Full moon bright, lanterns aglow · Sweet tangyuan, together we go ✨</div>
 
-            <!-- Three cute tangyuan (same design) -->
+            <!-- Three cute tangyuan (optimized for touch) -->
             <div class="tangyuan-row">
                 <div class="ball smile">
                     <span class="eye left-eye"></span>
@@ -416,7 +446,8 @@
                 </div>
                 <div class="ball wink">
                     <span class="eye left-eye"></span>
-                    <span class="eye right-eye" style="background: transparent; border-bottom: 4px solid #3e2a1f; width:16px; height:8px; border-radius:0; top:38%; right:20%; box-shadow:none; background:transparent;"></span>
+                    <!-- right eye styled inline for wink -->
+                    <span class="eye right-eye" style="background: transparent; border-bottom: 4px solid #3e2a1f; width:14px; height:7px; border-radius:0; top:38%; right:20%; box-shadow:none; background:transparent;"></span>
                     <span class="mouth-smile"></span>
                 </div>
             </div>
@@ -437,7 +468,7 @@
             </div>
         </div>
 
-        <div style="position: absolute; bottom: 5px; left: 10px; font-size: 0.8rem; color: #ab8e5d; z-index: 30; opacity: 0.5;">Lantern Festival · Wishes come true</div>
+        <div style="position: absolute; bottom: 5px; left: 10px; font-size: 0.7rem; color: #ab8e5d; z-index: 30; opacity: 0.5;">Lantern Festival · Wishes come true</div>
     </div>
 </body>
 </html>
