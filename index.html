@@ -82,7 +82,7 @@
             opacity: 0.95;
         }
 
-        /* 灯笼 - 手机优化 */
+        /* 灯笼 */
         .lantern {
             position: absolute;
             font-size: clamp(2.8rem, 9vw, 4.5rem);
@@ -128,20 +128,22 @@
             width: 95%;
         }
 
-        /* 语言切换按钮 - 精致小开关 */
+        /* ===== 语言切换按钮 - 移到底部中央 ===== */
         .lang-switch {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            bottom: 15px;           /* 距离底部15px */
+            left: 50%;
+            transform: translateX(-50%);  /* 水平居中 */
             z-index: 30;
             display: flex;
             gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 0.4rem 0.6rem;
             border-radius: 40px;
-            border: 1px solid #f9d56e;
-            box-shadow: 0 0 15px #ffb054;
+            border: 1.5px solid #f9d56e;
+            box-shadow: 0 0 20px #ffb054, 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .lang-btn {
@@ -163,11 +165,7 @@
             background: #f9d56e;
             color: #1b2b4a;
             border-color: #ffffffb0;
-            box-shadow: 0 0 12px #ffd966;
-        }
-
-        .lang-btn:first-child.active {
-            background: #f9d56e;
+            box-shadow: 0 0 15px #ffd966;
         }
 
         h1 {
@@ -372,7 +370,18 @@
             white-space: nowrap;
         }
 
-        /* 响应式微调 */
+        /* 左下角小字稍微上移，避免和切换按钮重叠 */
+        #credit {
+            position: absolute;
+            bottom: 70px;    /* 提高位置，避免被底部按钮遮挡 */
+            left: 10px;
+            font-size: 0.7rem;
+            color: #ab8e5d;
+            z-index: 30;
+            opacity: 0.5;
+        }
+
+        /* 响应式调整 */
         @media (max-width: 450px) {
             .content {
                 padding: 1.2rem 0.8rem;
@@ -399,6 +408,13 @@
             .lang-btn {
                 font-size: 0.9rem;
                 padding: 0.3rem 0.8rem;
+            }
+            .lang-switch {
+                bottom: 10px;   /* 小屏底部距离更小 */
+                padding: 0.3rem 0.5rem;
+            }
+            #credit {
+                bottom: 60px;   /* 同步调整 */
             }
         }
 
@@ -432,12 +448,6 @@
     <div class="night-sky">
         <div class="moon"></div>
 
-        <!-- 语言切换按钮 -->
-        <div class="lang-switch">
-            <button class="lang-btn active" id="btn-zh">🏮 中文</button>
-            <button class="lang-btn" id="btn-en">🏮 English</button>
-        </div>
-
         <!-- 灯笼装饰 -->
         <div class="lantern lantern1">🏮</div>
         <div class="lantern lantern2">🏮</div>
@@ -452,14 +462,13 @@
         <div class="glitter glitter2">✨</div>
         <div class="glitter glitter3">🎊</div>
 
-        <!-- 内容容器，所有文字部分由JS动态填充 -->
+        <!-- 内容容器 -->
         <div class="content" id="content">
-            <!-- 以下内容会通过js替换，但保留初始中文占位 -->
             <h1 id="title">元宵节快乐</h1>
             <div class="date" id="date">🏮 2026年3月2日 · 农历正月十五 🏮</div>
             <div class="poem" id="poem">✨ 火树银花合 · 星桥铁锁开 ✨</div>
 
-            <!-- 汤圆不变，静态 -->
+            <!-- 汤圆 -->
             <div class="tangyuan-row">
                 <div class="ball smile">
                     <span class="eye left-eye"></span>
@@ -478,7 +487,7 @@
                 </div>
             </div>
 
-            <!-- 灯谜区域动态 -->
+            <!-- 灯谜 -->
             <div class="riddle-block">
                 <details>
                     <summary class="riddle-summary" id="riddleSummary">🏮 猜灯谜：十五的月亮（打一成语）</summary>
@@ -486,7 +495,7 @@
                 </details>
             </div>
 
-            <!-- 底部祝福动态 -->
+            <!-- 底部祝福 -->
             <div class="footer-note" id="footer">
                 <span>🏮 花好月圆</span>
                 <span>🍡 事事圆满</span>
@@ -494,7 +503,14 @@
             </div>
         </div>
 
-        <div style="position: absolute; bottom: 5px; left: 10px; font-size: 0.7rem; color: #ab8e5d; z-index: 30; opacity: 0.5;" id="credit">元宵佳节 · 万事顺遂</div>
+        <!-- 语言切换按钮 - 移到底部中央（不会被刘海遮挡） -->
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btn-zh">🏮 中文</button>
+            <button class="lang-btn" id="btn-en">🏮 English</button>
+        </div>
+
+        <!-- 左下角小字 -->
+        <div id="credit">元宵佳节 · 万事顺遂</div>
     </div>
 
     <script>
@@ -535,23 +551,19 @@
             const btnEn = document.getElementById('btn-en');
 
             // 当前语言
-            let currentLang = 'zh';  // 默认中文
+            let currentLang = 'zh';
 
             // 更新页面文字
             function setLanguage(lang) {
                 currentLang = lang;
                 const t = translations[lang];
 
-                // 更新标题、日期、诗句
                 titleEl.textContent = t.title;
                 dateEl.textContent = t.date;
                 poemEl.textContent = t.poem;
-
-                // 更新灯谜
                 riddleSummaryEl.textContent = t.riddleSummary;
                 riddleAnswerEl.textContent = t.riddleAnswer;
 
-                // 更新底部三个祝福语 (footer内部span)
                 const footerSpans = footerEl.querySelectorAll('span');
                 if (footerSpans.length === 3) {
                     footerSpans[0].textContent = t.footer[0];
@@ -559,7 +571,6 @@
                     footerSpans[2].textContent = t.footer[2];
                 }
 
-                // 更新左下角小字
                 creditEl.textContent = t.credit;
 
                 // 切换按钮激活样式
@@ -572,11 +583,10 @@
                 }
             }
 
-            // 绑定点击事件
             btnZh.addEventListener('click', () => setLanguage('zh'));
             btnEn.addEventListener('click', () => setLanguage('en'));
 
-            // 初始设置为中文（确保按钮状态和文字一致）
+            // 初始设置为中文
             setLanguage('zh');
         })();
     </script>
