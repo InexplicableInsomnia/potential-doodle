@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🏮 Happy Lantern Festival · Full Moon Night</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 40% 50%, #1b2b4a, #0a1220);
+            font-family: 'Segoe UI', 'Arial', 'Microsoft YaHei', sans-serif;
+            overflow-x: hidden;
+            color: #fdf8e7;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .night-sky {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            min-height: 600px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3rem 1rem 3rem 1rem;
+            background: transparent;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 2px #f5e6b0 inset;
+            backdrop-filter: blur(2px);
+            overflow: hidden;
+        }
+
+        .night-sky::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 10% 20%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 23% 45%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 32% 78%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 45% 15%, #fff2b5, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 58% 33%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 67% 82%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 74% 51%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(5px 5px at 81% 19%, #fff2b5, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 88% 66%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 95% 39%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 7% 91%, #fff2b5, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 18% 72%, #fff9e6, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 39% 56%, #fff4d0, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 52% 94%, #fff9e6, rgba(0,0,0,0));
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .moon {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #fffde7, #ffe68f);
+            border-radius: 50%;
+            box-shadow: 0 0 80px 20px #ffdf80, 0 0 30px 5px #fff2c0;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        .lantern {
+            position: absolute;
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            line-height: 1;
+            user-select: none;
+            filter: drop-shadow(0 0 15px #ff7b2b) drop-shadow(0 0 8px #ffb347);
+            animation: float 5s ease-in-out infinite;
+            z-index: 5;
+            transform-origin: center;
+            text-shadow: 0 0 20px #f005;
+            pointer-events: none;
+        }
+
+        .lantern1 { top: 3%; left: 2%; animation-delay: 0s; font-size: 4.2rem; }
+        .lantern2 { top: 12%; right: 3%; animation-delay: 1.2s; font-size: 4.8rem; }
+        .lantern3 { bottom: 8%; left: 6%; animation-delay: 0.7s; font-size: 5rem; }
+        .lantern4 { bottom: 15%; right: 8%; animation-delay: 2s; font-size: 4.5rem; }
+        .lantern5 { top: 25%; left: 12%; animation-delay: 1.5s; font-size: 3.8rem; }
+        .lantern6 { bottom: 25%; right: 15%; animation-delay: 0.3s; font-size: 5.2rem; }
+        .lantern7 { top: 40%; left: 3%; animation-delay: 2.2s; font-size: 4rem; display: block; }
+        .lantern8 { bottom: 5%; left: 20%; animation-delay: 1.8s; font-size: 4.6rem; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            background: rgba(10, 20, 40, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 60px 20px 60px 20px;
+            padding: 2rem 2.5rem;
+            margin: 1.5rem;
+            border: 2px solid #f5d74288;
+            box-shadow: 0 20px 30px -10px black, 0 0 0 2px #f9d56e inset, 0 0 30px #ffb70055;
+            max-width: 750px;
+            width: fit-content;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 12vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 0 #b45f2b, 0 8px 10px #00000080, 0 0 20px #ffc107;
+            color: #fff8e0;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .date {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #f9d56e, #ffb054);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 2px 5px #00000050;
+        }
+
+        .poem {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #ffebb5;
+            margin-bottom: 2rem;
+            border-top: 1px dashed #f9b83a;
+            border-bottom: 1px dashed #f9b83a;
+            padding: 0.6rem 0;
+            background: #00000020;
+            border-radius: 30px;
+        }
+
+        .tangyuan-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2.5rem;
+            margin: 2rem 0 1.8rem;
+        }
+
+        .ball {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 35% 35%, #fffbf0, #fce6c0);
+            border-radius: 50%;
+            box-shadow: 0 10px 0 #c09a70, 0 15px 25px #00000060, inset -8px -5px 15px #bba88888, inset 5px 5px 20px white;
+            position: relative;
+            transition: transform 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ball:hover {
+            transform: scale(1.05);
+        }
+
+        .eye {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #3e2a1f;
+            border-radius: 50%;
+            top: 35%;
+            box-shadow: 0 2px 2px black;
+        }
+
+        .left-eye {
+            left: 25%;
+        }
+
+        .right-eye {
+            right: 25%;
+        }
+
+        .mouth-smile {
+            position: absolute;
+            width: 44px;
+            height: 22px;
+            border-bottom: 5px solid #6b4c3b;
+            border-radius: 0 0 30px 30px;
+            bottom: 22%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .mouth-surprise {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #6b4c3b;
+            border-radius: 50%;
+            bottom: 26%;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 4px black;
+        }
+
+        .ball.wink .right-eye {
+            background: transparent;
+            width: 16px;
+            height: 8px;
+            border-bottom: 4px solid #3e2a1f;
+            border-radius: 0;
+            top: 38%;
+            right: 20%;
+            box-shadow: none;
+        }
+
+        .ball::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 10px;
+            background: #ffb6b6a0;
+            border-radius: 50%;
+            bottom: 40%;
+            left: 8%;
+            filter: blur(3px);
+            opacity: 0.8;
+        }
+
+        .ball::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 10px;
+            background: #ffb6b6a0;
+            border-radius: 50%;
+            bottom: 40%;
+            right: 8%;
+            filter: blur(3px);
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .riddle-block {
+            margin: 2rem auto 0.5rem;
+            width: 90%;
+            max-width: 400px;
+            background: #263b55c0;
+            border-radius: 50px 10px 50px 10px;
+            border: 2px solid #f1cf7a;
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(5px);
+            color: #ffefc0;
+            text-align: left;
+        }
+
+        .riddle-summary {
+            font-size: 1.35rem;
+            font-weight: bold;
+            list-style: '🏮 ';
+            cursor: pointer;
+            padding: 0.3rem 0;
+            transition: color 0.2s;
+        }
+
+        .riddle-summary:hover {
+            color: #ffe88e;
+        }
+
+        .riddle-answer {
+            margin-top: 0.8rem;
+            font-size: 1.6rem;
+            color: #ffdb7c;
+            text-align: center;
+            background: #0e1f2f;
+            padding: 0.6rem 0;
+            border-radius: 30px;
+            border: 1px solid #ffb851;
+            box-shadow: 0 0 15px #ffad37;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        details[open] .riddle-summary {
+            color: #ffd966;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            color: #d6c69a;
+            text-shadow: 0 0 10px black;
+            border-top: 1px solid #fad15e50;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-note span {
+            background: #2a3f5a80;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+        }
+
+        @media (max-width: 550px) {
+            .content {
+                padding: 1.5rem 1rem;
+            }
+            .moon {
+                width: 90px;
+                height: 90px;
+                top: 2%;
+                right: 2%;
+            }
+            .lantern {
+                font-size: 3.2rem;
+            }
+            .ball {
+                width: 80px;
+                height: 80px;
+            }
+            .mouth-smile {
+                width: 35px;
+                border-bottom: 4px solid #6b4c3b;
+            }
+            .eye {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .lantern7, .lantern8 {
+                display: none;
+            }
+        }
+
+        .glitter {
+            position: absolute;
+            color: #ffec9e;
+            font-size: 2rem;
+            opacity: 0.5;
+            animation: glitterFloat 8s infinite linear;
+            user-select: none;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .glitter1 { top: 20%; left: 15%; animation-delay: 0s; }
+        .glitter2 { top: 70%; left: 85%; animation-delay: 3s; }
+        .glitter3 { top: 45%; left: 75%; animation-delay: 5s; }
+        @keyframes glitterFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+            50% { transform: translateY(-30px) rotate(30deg); opacity: 0.7; }
+            100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="night-sky">
+        <div class="moon"></div>
+
+        <div class="lantern lantern1">🏮</div>
+        <div class="lantern lantern2">🏮</div>
+        <div class="lantern lantern3">🏮</div>
+        <div class="lantern lantern4">🏮</div>
+        <div class="lantern lantern5">🏮</div>
+        <div class="lantern lantern6">🏮</div>
+        <div class="lantern lantern7">🏮</div>
+        <div class="lantern lantern8">🏮</div>
+
+        <div class="glitter glitter1">✨</div>
+        <div class="glitter glitter2">✨</div>
+        <div class="glitter glitter3">🎊</div>
+
+        <div class="content">
+            <!-- English title and greetings -->
+            <h1>Happy Lantern Festival</h1>
+            <div class="date">🏮 March 2, 2026 · The 15th of First Lunar Month 🏮</div>
+            <div class="poem">✨ Full moon bright, lanterns aglow · Sweet tangyuan, together we go ✨</div>
+
+            <!-- Three cute tangyuan (same design) -->
+            <div class="tangyuan-row">
+                <div class="ball smile">
+                    <span class="eye left-eye"></span>
+                    <span class="eye right-eye"></span>
+                    <span class="mouth-smile"></span>
+                </div>
+                <div class="ball surprise">
+                    <span class="eye left-eye"></span>
+                    <span class="eye right-eye"></span>
+                    <span class="mouth-surprise"></span>
+                </div>
+                <div class="ball wink">
+                    <span class="eye left-eye"></span>
+                    <span class="eye right-eye" style="background: transparent; border-bottom: 4px solid #3e2a1f; width:16px; height:8px; border-radius:0; top:38%; right:20%; box-shadow:none; background:transparent;"></span>
+                    <span class="mouth-smile"></span>
+                </div>
+            </div>
+
+            <!-- Lantern riddle in English -->
+            <div class="riddle-block">
+                <details>
+                    <summary class="riddle-summary">🏮 Riddle: I’m not the sun, but I shine at night. I change my shape, yet I’m always bright. What am I?</summary>
+                    <div class="riddle-answer">The Moon</div>
+                </details>
+            </div>
+
+            <!-- Footer blessings in English -->
+            <div class="footer-note">
+                <span>🏮 Full Moon, Full Joy</span>
+                <span>🍡 Sweet Reunion</span>
+                <span>🏮 Peace & Prosperity</span>
+            </div>
+        </div>
+
+        <div style="position: absolute; bottom: 5px; left: 10px; font-size: 0.8rem; color: #ab8e5d; z-index: 30; opacity: 0.5;">Lantern Festival · Wishes come true</div>
+    </div>
+</body>
+</html>
